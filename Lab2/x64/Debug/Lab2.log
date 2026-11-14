@@ -1,0 +1,7 @@
+﻿  Lab2.cpp
+D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(122,44): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(122,28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(165,44): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(165,28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(291,28): warning C4101: 'error_msg': unreferenced local variable
+  Lab2.vcxproj -> D:\АГУ\ООП\Lab2\x64\Debug\Lab2.exe
