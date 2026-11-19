@@ -15,10 +15,10 @@ public:
         m = 0;
         n = 0;
     }
-    std::string get() {
+    std::string Get() {
         return std::to_string(m) + " " + std::to_string(n);
     }
-    void set(int r_m, int r_n) {
+    void Set(int r_m, int r_n) {
         if (r_n == 0 && r_m != 0) {
             throw "Ошибка! Знаменатель не может быть равен 0!";
         }
@@ -33,167 +33,174 @@ public:
         }
     }
     //сокращение дроби
-    void reduce() {
+    void Reduce() {
         int gcd_value = gcd(m, n);
         m /= gcd_value;
         n /= gcd_value;
     }
     // Алгоритм Евклида для нахождения НОД
     int gcd(int a, int b) {
-        while (b != 0) {
-            int temp = b;
-            b = a % b;
-            a = temp;
+        try {
+            while (b != 0) {
+                int temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
         }
-        return a;
+        catch (const char* error_message)
+        {
+            std::cout << error_message << std::endl;
+            return 0;
+        }     
     }
 
-    void print() {
+    void Print() {
         std::cout << std::to_string(m) << "/" << std::to_string(n);
     }
-    void enter() {
+    void Enter() {
         int m;
         int n;
         std::cin >> m >> n;
-        set(m, n);
+        Set(m, n);
     }
-    double toDouble() const{
+    double ToDouble() const{
         return static_cast<double>(m) / n;
     }
-    static void compare(Ratio rat1, Ratio rat2) {
-        if (rat1.toDouble() == rat2.toDouble()) {
+    static void Compare(Ratio rat1, Ratio rat2) {
+        if (rat1.ToDouble() == rat2.ToDouble()) {
             std::cout << "Дроби равны\n";
         }
-        else if (rat1.toDouble() > rat2.toDouble()) {
+        else if (rat1.ToDouble() > rat2.ToDouble()) {
             std::cout << "Дробь ";
-            rat1.print();
+            rat1.Print();
             std::cout << " больше чем дробь ";
-            rat2.print();
+            rat2.Print();
         }
         else {
             std::cout << "Дробь ";
-            rat1.print();
+            rat1.Print();
             std::cout << " меньше чем дробь ";
-            rat2.print();
+            rat2.Print();
         }
     }
 #pragma region Calculations
-    static void sum(Ratio rat1, Ratio rat2) {
+    static void Sum(Ratio rat1, Ratio rat2) {
         Ratio result;
         if (rat1.n == rat2.n) {
-            result.set(rat1.m + rat2.m, rat1.n);
+            result.Set(rat1.m + rat2.m, rat1.n);
         }
         else {
-            result.set((rat1.m * rat2.n) + (rat2.m * rat1.n), rat1.n * rat2.n);
+            result.Set((rat1.m * rat2.n) + (rat2.m * rat1.n), rat1.n * rat2.n);
         }
-        result.reduce();
-        result.print();
+        result.Reduce();
+        result.Print();
     }
-    static void subtraction(Ratio rat1, Ratio rat2) {
+    static void Subtraction(Ratio rat1, Ratio rat2) {
         Ratio result;
         if (rat1.n == rat2.n) {
-            result.set(rat1.m - rat2.m, rat1.n);
+            result.Set(rat1.m - rat2.m, rat1.n);
         }
         else {
-            result.set((rat1.m * rat2.n) - (rat2.m * rat1.n), rat1.n * rat2.n);
+            result.Set((rat1.m * rat2.n) - (rat2.m * rat1.n), rat1.n * rat2.n);
         }
-        result.reduce();
-        result.print();
+        result.Reduce();
+        result.Print();
     }
-    static void division(Ratio rat1, Ratio rat2) {
+    static void Division(Ratio rat1, Ratio rat2) {
         Ratio result;
 
-        result.set(rat1.m * rat2.n, rat1.n * rat2.m);
+        result.Set(rat1.m * rat2.n, rat1.n * rat2.m);
 
-        result.reduce();
-        result.print();
+        result.Reduce();
+        result.Print();
     }
-    static void multiplication(Ratio rat1, Ratio rat2) {
+    static void Multiplication(Ratio rat1, Ratio rat2) {
         Ratio result;
 
-        result.set(rat1.m * rat2.m, rat1.n * rat2.n);
+        result.Set(rat1.m * rat2.m, rat1.n * rat2.n);
 
-        result.reduce();
-        result.print();
+        result.Reduce();
+        result.Print();
     }
-    void pow(int p) {
+    void Pow(int p) {
         Ratio result;
 
-        result.set(std::pow(m, p), std::pow(n, p));
+        result.Set(std::pow(m, p), std::pow(n, p));
 
-        result.reduce();
-        result.print();
+        result.Reduce();
+        result.Print();
     }
 #pragma endregion
 #pragma region Overload
     Ratio operator+(const Ratio& rat2) const {
         Ratio result;
         if (n == rat2.n) {
-            result.set(m + rat2.m, n);
+            result.Set(m + rat2.m, n);
         }
         else {
-            result.set((m * rat2.n) + (rat2.m * n), n * rat2.n);
+            result.Set((m * rat2.n) + (rat2.m * n), n * rat2.n);
         }
-        result.reduce();
+        result.Reduce();
         return result;
     }
     Ratio operator-(Ratio& rat2) {
         Ratio result;
         if (n == rat2.n) {
-            result.set(m - rat2.m, n);
+            result.Set(m - rat2.m, n);
         }
         else {
-            result.set((m * rat2.n) - (rat2.m * n), n * rat2.n);
+            result.Set((m * rat2.n) - (rat2.m * n), n * rat2.n);
         } 
-        result.reduce();
+        result.Reduce();
         return result;
     }
     Ratio operator*(const Ratio& rat2) const {
         Ratio result;
-        result.set(m * rat2.m, n * rat2.n);
-        result.reduce();
+        result.Set(m * rat2.m, n * rat2.n);
+        result.Reduce();
         return result;
     }
     Ratio operator/(const Ratio& rat2) const {
         Ratio result;
-        result.set(m * rat2.n, n * rat2.m);
-        result.reduce();
+        result.Set(m * rat2.n, n * rat2.m);
+        result.Reduce();
         return result;
     }
     Ratio operator^(const int& p) const {
         Ratio result;
-        result.set(std::pow(m, p), std::pow(n, p));
-        result.reduce();
+        result.Set(std::pow(m, p), std::pow(n, p));
+        result.Reduce();
         return result;
     }
     Ratio operator-() const {
         Ratio result;
         if (m != 0) {
-            result.set(-m, n);
+            result.Set(-m, n);
         }
         else {
             throw "Нулевая дробь не имеет знака";
         }
-        result.reduce();
+        result.Reduce();
         return result;
     }
     Ratio operator++() const {
         Ratio result;
-        result.set(m + n, n);
+        result.Set(m + n, n);
 
-        result.reduce();
+        result.Reduce();
         return result;
     }
     Ratio operator--() const {
         Ratio result;
-        result.set(m - n, n);
+        result.Set(m - n, n);
 
-        result.reduce();
+        result.Reduce();
         return result;
     }
     bool operator==(const Ratio& rat2) const {
         bool result;
-        if (toDouble() == rat2.toDouble()) {
+        if (ToDouble() == rat2.ToDouble()) {
             result = true;
         }
         else {
@@ -205,8 +212,8 @@ public:
     bool operator!=(const Ratio& rat2) const {
         bool result;
         Ratio rat1;
-        rat1.set(m, n);
-        if (rat1.toDouble() != rat2.toDouble()) {
+        rat1.Set(m, n);
+        if (rat1.ToDouble() != rat2.ToDouble()) {
             result = true;
         }
         else {
@@ -218,8 +225,8 @@ public:
     bool operator>(const Ratio& rat2) const {
         bool result;
         Ratio rat1;
-        rat1.set(m, n);
-        if (rat1.toDouble() > rat2.toDouble()) {
+        rat1.Set(m, n);
+        if (rat1.ToDouble() > rat2.ToDouble()) {
             result = true;
         }
         else {
@@ -231,8 +238,8 @@ public:
     bool operator<(const Ratio& rat2) const {
         bool result;
         Ratio rat1;
-        rat1.set(m, n);
-        if (rat1.toDouble() < rat2.toDouble()) {
+        rat1.Set(m, n);
+        if (rat1.ToDouble() < rat2.ToDouble()) {
             result = true;
         }
         else {
@@ -244,8 +251,8 @@ public:
     bool operator>=(const Ratio& rat2) const {
         bool result;
         Ratio rat1;
-        rat1.set(m, n);
-        if (rat1.toDouble() >= rat2.toDouble()) {
+        rat1.Set(m, n);
+        if (rat1.ToDouble() >= rat2.ToDouble()) {
             result = true;
         }
         else {
@@ -257,8 +264,8 @@ public:
     bool operator<=(const Ratio& rat2) const {
         bool result;
         Ratio rat1;
-        rat1.set(m, n);
-        if (rat1.toDouble() <= rat2.toDouble()) {
+        rat1.Set(m, n);
+        if (rat1.ToDouble() <= rat2.ToDouble()) {
             result = true;
         }
         else {
@@ -286,10 +293,11 @@ std::istream& operator>>(std::istream& is, Ratio& r) {
     // Если ввод прошел успешно
     if (is) {
         try {
-            r.set(m_val, n_val);
+            r.Set(m_val, n_val);
         }
-        catch (const char* error_msg) {
+        catch (const char* error_message) {
             is.setstate(std::ios::failbit);
+            std::cout << error_message << std::endl;
         }
     }
     return is;
