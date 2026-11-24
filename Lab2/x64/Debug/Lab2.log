@@ -1,6 +1,5 @@
 ﻿  Lab2.cpp
-D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(129,44): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(129,28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(172,44): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(172,28): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(171,34): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(171,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\АГУ\ООП\Lab2\Lab2\Lab2.cpp(171,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   Lab2.vcxproj -> D:\АГУ\ООП\Lab2\x64\Debug\Lab2.exe

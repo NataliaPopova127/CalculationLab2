@@ -1,7 +1,9 @@
 ﻿#include <iostream>
 #include <string>
 #include <cmath> 
+#define NOMINMAX 
 #include <windows.h>
+#include <limits>
 // (m/n)
 class Ratio {
     // Объявляем дружественные функции
@@ -19,7 +21,7 @@ public:
         return std::to_string(m) + " " + std::to_string(n);
     }
     void Set(int r_m, int r_n) {
-        if (r_n == 0 && r_m != 0) {
+        if (r_n == 0) {
             throw "Ошибка! Знаменатель не может быть равен 0!";
         }
         else {
@@ -124,12 +126,9 @@ public:
         result.Print();
     }
     void Pow(int p) {
-        Ratio result;
-
-        result.Set(std::pow(m, p), std::pow(n, p));
-
-        result.Reduce();
-        result.Print();
+        p < 0 ? Set(n, m ^ (-p)) : Set(m ^ p, n ^ p);
+        Reduce();
+        Print();
     }
 #pragma endregion
 #pragma region Overload
@@ -169,7 +168,7 @@ public:
     }
     Ratio operator^(const int& p) const {
         Ratio result;
-        result.Set(std::pow(m, p), std::pow(n, p));
+        p < 0 ? result.Set(n, pow(m, -p)) : result.Set(pow(m, p), pow(n, p));
         result.Reduce();
         return result;
     }
@@ -304,8 +303,13 @@ std::istream& operator>>(std::istream& is, Ratio& r) {
 }
 int main()
 {
-    try {
-        while (true) {
+    while (true) {
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+        try {
+
             SetConsoleCP(1251);
             SetConsoleOutputCP(1251);
             Ratio rat1;
@@ -313,40 +317,42 @@ int main()
             Ratio res;
             char sign;
 
-            std::cout << "Рациональный Калькулятор (+, -, /, *)" << std::endl;
+            std::cout << "-------------------------------------\n";
+            std::cout << "Рациональный Калькулятор (+, -, /, *)\n";
             std::cout << "Введите a, операцию, b: ";
             std::cin >> rat1 >> sign >> rat2;
-            
+
 
             switch (sign) {
             case '+':
                 res = rat1 + rat2;
+                std::cout << "Результат: " << rat1 << " " << sign << " " << rat2 << " = " << res;
+                std::cout << "\n";
                 break;
             case '-':
                 res = rat1 - rat2;
+                std::cout << "Результат: " << rat1 << " " << sign << " " << rat2 << " = " << res;
+                std::cout << "\n";
                 break;
             case '*':
                 res = rat1 * rat2;
+                std::cout << "Результат: " << rat1 << " " << sign << " " << rat2 << " = " << res;
+                std::cout << "\n";
                 break;
             case '/':
                 res = rat1 / rat2;
+                std::cout << "Результат: " << rat1 << " " << sign << " " << rat2 << " = " << res;
+                std::cout << "\n";
                 break;
             default:
-                throw "Неизвестное выражение";
+                throw "\nНеизвестное выражение\n";
                 break;
             }
-            std::cout << "Результат: " << rat1 << " " << sign << " " << rat2 << " = " << res;
-            std::cout <<"\n";
-
-
-            /*res = --rat1;
-            res.print();*/
-            //std::cout << (rat1 != rat2) << "\n";
+           // rat1.Pow(2);
         }
-    }
-    catch (const char* error_message)
-    {
-        std::cout << error_message << std::endl;
-        return 0;
+        catch (const char* error_message)
+        {
+            std::cout << error_message << std::endl;
+        }
     }
 }
